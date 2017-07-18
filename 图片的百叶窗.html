@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/TweenMax.min.js"></script>
+		<style type="text/css">
+			body{
+				overflow: hidden;
+			}
+			ul,li{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			#box{
+				margin-top: 100px;
+				margin-left: 100px;
+				height: 330px;
+				width:810px;
+				transform-style: preserve-3d;
+				perspective:1000px;
+			}
+			#box ul{
+				height: 330px;
+				width:810px;
+			}
+			#box ul li{
+				height: 16.5px;
+				width:810px;
+				background: url(images/img2.gif) no-repeat;
+				transform: rotateX(0deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" value="更换图片" id="btn1"/>
+			<ul></ul>
+		</div>
+		<script type="text/javascript">
+			var btn1 = document.getElementById('btn1');
+			var box = document.getElementById('box');
+			var ul = box.getElementsByTagName('ul')[0];
+			var lis = ul.getElementsByTagName('li');
+			var num = 0;
+			var num2 = 0;
+			var num3 = 0;
+			for(var i =0 ;i<20;i++){
+				ul.innerHTML += '<li></li>'
+				lis[i].style.backgroundPosition ='0 '+-i*16.5+'px';
+			}
+			btn1.onclick = function(){
+				var t = new TimelineMax();
+				t.staggerTo("li",1,{
+					rotationX : 0,
+					rotationZ : 90,
+					onComplete : function(){
+						this.target.style.background = 'url(images/img5.gif) no-repeat';
+						this.target.style.backgroundPosition ='0 '+-16.5*num+'px';
+						this.target.style.transform = "rotateZ(0deg)";
+						this.target.style.transform = "rotateX(0deg)";
+						this.target.style.transition = "1s";
+						num++;
+					},
+				},0.2)
+				t.staggerTo("li",1,{
+					rotationZ : 90,
+					rotationX : 0,
+					onComplete : function(){
+						this.target.style.background = 'url(images/img6.gif) no-repeat';
+						this.target.style.backgroundPosition ='0 '+-16.5*num2+'px';
+						this.target.style.transform = "rotateZ(0deg)";
+						this.target.style.transform = "rotateX(0deg)";
+						this.target.style.transition = "1s";
+						num2++;
+					},
+				},0.2)
+				t.staggerTo("li",1,{
+					rotationZ : 90,
+					rotationX : 0,
+					onComplete : function(){
+						this.target.style.background = 'url(images/img2.gif) no-repeat';
+						this.target.style.backgroundPosition ='0 '+-16.5*num3+'px';
+						this.target.style.transform = "rotateZ(0deg)";
+						this.target.style.transform = "rotateX(0deg)";
+						this.target.style.transition = "1s";
+						num3++;
+					},
+				},0.2)
+				num = 0;
+				num2 = 0;
+				num3 = 0;
+			}
+		</script>
+	</body>
+</html>
